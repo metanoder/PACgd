@@ -12,7 +12,7 @@ func add(obj):
 	items.append(obj)
 	emit_signal("item_added", obj)
 	
-func remove(obj):
+func remove_at(obj):
 	items.erase(obj)
 	emit_signal("item_removed", obj)
 

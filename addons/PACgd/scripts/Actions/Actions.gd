@@ -9,7 +9,7 @@
 #      - examine <object> -> object.examine(player)
 #      - open <object> -> object.open(player)
 #    - TO_COMBINE actions need two objects to be COMBINED
-#      - use_item <this> -> (use_item <this>) <on that> -> that.use_item(this)
+#      - use_item <this> -> (use_item <this>) <checked that> -> that.use_item(this)
 #    - INTERNAL action change the inner variables/states of an object, or
 #      access their functions
 #      - set <var> <value> -> player.set(var, value)

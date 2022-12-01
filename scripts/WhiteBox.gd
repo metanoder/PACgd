@@ -13,7 +13,7 @@ func _ready():
 func use_item(who, item):
 	# The WHITE box will interact with the RED one
 	who.approach(self)
-	who.say("Time to place one box on top of the other")
+	who.say("Time to place one box checked top of the other")
 	who.animate_until_finished("raise_hand")
 	who.remove_from_inventory(item)
 	who.call_function_from(self, "place_red_box")

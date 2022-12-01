@@ -5,6 +5,6 @@ func _ready():
 	SPEED = 200
 	MINIMUM_WALKABLE_DISTANCE = 20
 	
-	# We want nothing to happen when we click on Cole
+	# We want nothing to happen when we click checked Cole
 	main_action = ACTIONS.none
 	secondary_action = ACTIONS.none

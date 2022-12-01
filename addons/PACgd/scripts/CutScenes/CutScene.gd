@@ -15,7 +15,7 @@ var choices = []
 
 # Functions
 
-func _init(scene_file, str2obj, _point_and_click):
+func _init(scene_file,str2obj,_point_and_click):
 	# On init we define the P&C and parse the file
 	point_and_click = _point_and_click
 	
@@ -28,10 +28,10 @@ func play():
 	
 	# Disconnect finished scenes
 	if current_action:
-		current_action.disconnect("scene_finished", self, "scene_finished")
+		current_action.disconnect("scene_finished",Callable(self,"scene_finished"))
 	
 	# Check if there are new scenes, otherwise activate the P&C and go back
-	if scene_actions.empty():
+	if scene_actions.is_empty():
 		point_and_click.active = true
 		return
 	
@@ -49,7 +49,7 @@ func play():
 		return play()
 	
 	# Connect the scene to this cutscene, and wait for it to finish
-	current_action.connect("scene_finished", self, "scene_finished")
+	current_action.connect("scene_finished",Callable(self,"scene_finished"))
 	current_action.play()
 
 func scene_finished(resulting_scenes):
