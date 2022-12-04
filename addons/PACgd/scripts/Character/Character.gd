@@ -2,12 +2,18 @@ extends Interactive
 class_name Character
 
 # A player is basically a queue of actions that is constantly running
-const STATES = preload("States.gd")
-var queue = preload("Queue.gd").Queue.new()
+var STATES = preload("res://addons/PACgd/scripts/Character/States.gd")
+var queue = preload("res://addons/PACgd/scripts/Character/Queue.gd").Queue.new()
 
 # They know where the camera is, where they can walk
 var camera
 var navigation
+var nav_agent
+var nav_mesh
+var nav_map_id
+
+func get_nav_agent():
+	nav_agent = $NavigationAgent3D
 
 # They have an inventory
 var inventory = Inventory.new()
@@ -51,8 +57,8 @@ func _physics_process(_delta):
 
 # Internal Functions
 func face_direction(direction):
-	var my_pos = camera.unproject_position(transform.origin)
-	var dir = camera.unproject_position(transform.origin + direction)
+	var my_pos = camera.unproject_position(position)
+	var dir = camera.unproject_position(position + direction)
 	
 	if dir.x < my_pos.x:
 		sprite.scale.x = -abs(sprite.scale.x)
@@ -116,22 +122,38 @@ func wait_on_character(who:Character, message:String):
 func approach(object):
 	assert(navigation != null) #,"You forgot to set the navigation of " + oname)
 
-	if not object.interaction_position: return
+#	been having problems with this one...
+#	navigation variable is a node3d but function used was originally vector3
+#	looks like i had to assign from level the NavigationRegion3d, and get RID from it
 
-	var end = navigation.get_closest_point(object.interaction_position)
+#	if not object.interaction_position: return
 
-	if (end - transform.origin).length() > MINIMUM_WALKABLE_DISTANCE:
+#	var end = navigation.get_closest_point(object.interaction_position)
+	var end = navigation.map_get_closest_point(nav_map_id, object.interaction_position)
+	print (nav_map_id, " map id")
+	print (object.interaction_position, "end")
+	print (navigation, " navigation variable")
+	print (position, " position")
+	print (end, " ...end")
+	
+	var tot_length = (end - position)
+	print(tot_length, " == end - position")
+	print(tot_length.length(), " calling .length")
+	
+	if (end - position).length() > MINIMUM_WALKABLE_DISTANCE:
 		# We actually need to walk
-		var begin = navigation.get_closest_point(transform.origin)
-		var path = navigation.get_simple_path(begin, end, true)
+		var begin = nav_agent.map_get_closest_point(position)
+		var path = nav_agent.NavigationServer.map_get_path(begin, end, true)
 
 		queue.append(STATES.Animate.new(self, "walk"))
 		queue.append(STATES.WalkPath.new(self, path))
 		queue.append(STATES.FaceObject.new(self, object))
 		queue.append(STATES.Animate.new(self, "idle"))
+		
+		print (begin, " walk func works")
 	else:
 		queue.append(STATES.State.new()) # queue nothing to keep signals working
-
+		print ("position length is not more than origin point, nothing happens")
 
 # Default answers to actions
 func receive_item(who, item):

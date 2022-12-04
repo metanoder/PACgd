@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 # THIS IS THE POINT AND CLICK SYSTEM
@@ -8,7 +7,7 @@ extends Node2D
 # the code! It's quite cool actually - Signed: The person who wrote the code
 @onready var ACTIONS = preload("Actions/Actions.gd").new()
 @onready var gui = $Dialog/Choices
-
+@onready var CutScene = preload("res://addons/PACgd/scripts/CutScenes/CutScene.gd")
 # This is a point and click game, sounds fair to have all the time
 # in mind where the mouse is, which object is under it, who is the
 # main player and the current action (for combining actions)
@@ -71,7 +70,7 @@ func get_object_under_mouse(mouse_pos:Vector2, RAY_LENGTH=50, avoid=[]):
 	if space is PhysicsDirectSpaceState2D:
 		# Get the object with the highest z_index
 		var intersections = space.intersect_point(mouse_pos, 2, avoid, 2147483647, true, true)
-
+		
 		for obj in intersections:
 			if ray:
 				if obj['collider'].z_index > ray['collider'].z_index:
@@ -84,7 +83,11 @@ func get_object_under_mouse(mouse_pos:Vector2, RAY_LENGTH=50, avoid=[]):
 
 		var from = player.camera.project_ray_origin(mouse_pos)
 		var to = from + player.camera.project_ray_normal(mouse_pos) * RAY_LENGTH
-		ray = space.intersect_ray(from, to, avoid)
+
+		ray = space.intersect_ray(PhysicsRayQueryParameters3D.create(from,to))
+#		print(from)
+#		print(to)
+#		ray = space.intersect_ray(from, to, avoid)
 	
 	if ray:
 		var pac = ray['collider'] is Interactive

@@ -2,7 +2,7 @@ extends Interactive2D
 class_name Character2D
 
 # A player is basically a queue of actions that is constantly running
-const STATES = preload("States.gd")
+var STATES = preload("States.gd")
 var queue = preload("Queue.gd").Queue.new()
 
 # They know where the camera is, where they can walk

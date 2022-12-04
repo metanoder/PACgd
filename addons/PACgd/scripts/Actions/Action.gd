@@ -33,9 +33,9 @@ func uncombine():
 	type = orig_type
 
 func execute(whom, what):
-	
-	if not function:
-		return
+	print (function)
+#	if not function:
+#		return
 	
 	whom.interrupt()
 	

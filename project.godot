@@ -53,6 +53,16 @@ _global_script_classes=[{
 "class": &"Inventory",
 "language": &"GDScript",
 "path": "res://addons/PACgd/scripts/Character/Inventory.gd"
+}, {
+"base": "Node",
+"class": &"Parser",
+"language": &"GDScript",
+"path": "res://addons/PACgd/scripts/CutScenes/Parser.gd"
+}, {
+"base": "RefCounted",
+"class": &"States",
+"language": &"GDScript",
+"path": "res://addons/PACgd/scripts/Character/States.gd"
 }]
 _global_script_class_icons={
 "Action": "",
@@ -63,7 +73,9 @@ _global_script_class_icons={
 "Floor2D": "",
 "Interactive": "",
 "Interactive2D": "",
-"Inventory": ""
+"Inventory": "",
+"Parser": "",
+"States": ""
 }
 
 [application]

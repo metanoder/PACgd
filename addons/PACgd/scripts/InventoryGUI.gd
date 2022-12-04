@@ -1,7 +1,7 @@
 extends Panel
 
 const ITEM_SIZE = Vector2(48, 48)
-@onready var SLOT_SIZE = $Slots.get_constant("h_separation") + ITEM_SIZE.x
+@onready var SLOT_SIZE = $Slots.get_theme_constant("h_separation") + ITEM_SIZE.x
 
 var inventory_to_follow
 

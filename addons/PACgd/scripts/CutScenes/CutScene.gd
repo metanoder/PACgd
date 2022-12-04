@@ -1,8 +1,8 @@
 extends Node
 class_name CutScene
 
-var SCENES = preload("Scenes.gd").new()
-
+var SCENES = preload("res://addons/PACgd/scripts/CutScenes/Scenes.gd").new()
+var Parser = preload("res://addons/PACgd/scripts/CutScenes/Parser.gd").new()
 # A Cutscene is a stack of scenes to be played one by one
 # When a cutscene is played the point and click will be disabled
 var scene_actions = []

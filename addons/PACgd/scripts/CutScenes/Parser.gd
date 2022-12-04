@@ -29,8 +29,8 @@ func parse_file(_scene_file, _str2obj):
 			return []
 	
 	# Parses all the lines of a file
-	var file = File.new()
-	file.open(_scene_file, File.READ)
+	var file = FileAccess.new()
+	file.open(_scene_file, FileAccess.READ)
 	lines = Array(file.get_as_text().split('\n', false))
 	file.close()
 
@@ -141,7 +141,7 @@ func parse_action(line):
 				return []
 			
 			var combine = Action.new(real_action.function, real_action.text,
-									 real_action.type, real_action.nexus)
+									real_action.type, real_action.nexus)
 			combine.combine(str2obj[obj1])
 	
 			return SCENES.ExecAction.new(whom, combine, str2obj[obj2])

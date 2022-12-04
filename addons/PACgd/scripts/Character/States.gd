@@ -1,3 +1,5 @@
+class_name States
+
 class State:
 	var blocked = false
 	var finished = false
@@ -178,7 +180,6 @@ class WalkPath extends State:
 	# Function to walk
 	var path = []
 	var path_idx = 0
-	 
 	func _init(_who,_path):
 		who = _who
 		path = _path

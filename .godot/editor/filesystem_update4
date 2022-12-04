@@ -1,3 +1,4 @@
 res://Level.tscn
+res://addons/PACgd/Cole/Cole.gd
 res://addons/PACgd/scripts/Point_and_Click.gd
-res://addons/PACgd/Point_and_Click.tscn
+res://addons/PACgd/Cole/Cole.tscn
